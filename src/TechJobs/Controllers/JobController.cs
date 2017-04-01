@@ -38,7 +38,10 @@ namespace TechJobs.Controllers
             // new Job and add it to the JobData data store. Then
             // redirect to the Job detail (Index) action/view for the new Job.
 
-            return View(newJobViewModel);
+            // UNCOMMENT THIS WHEN YOU PICK BACK UP! 
+            // if (ModelState.IsValid)
+
+                return View(newJobViewModel);
         }
     }
 }
