@@ -37,28 +37,7 @@ namespace TechJobs.Controllers
             // TODO #6 - Validate the ViewModel and if valid, create a 
             // new Job and add it to the JobData data store. Then
             // redirect to the Job detail (Index) action/view for the new Job.
-
-            /*
-        [HttpPost]
-        public IActionResult Add(AddCheeseViewModel addCheeseViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                // Add the new cheese to my existing cheeses
-                Cheese newCheese = new Models.Cheese
-                {
-                    Name = addCheeseViewModel.Name,
-                    Description = addCheeseViewModel.Description,
-                    Type = addCheeseViewModel.Type
-                };
-
-                CheeseData.Add(newCheese);
-
-                return Redirect("/Cheese");
-            }
-             */
-
-            // (ID, Name, Employer, Location, Core Competency, Position Type)
+            
             if (ModelState.IsValid)
             {
                 JobData data = JobData.GetInstance();
@@ -70,12 +49,18 @@ namespace TechJobs.Controllers
                 newJob.CoreCompetency = data.CoreCompetencies.Find(newJobViewModel.CoreCompetencyID);
                 newJob.PositionType = data.PositionTypes.Find(newJobViewModel.PositionTypeID);
 
-                jobData.Jobs.Add(newJob)
-
+                jobData.Jobs.Add(newJob);
+                int newID = newJob.ID;
+                // int thisID = jobData.Jobs.Count;
                 // when you return, use /Job?id={0}
+                return Redirect("/Job?id=" + newJob.ID);
+            }
+            else
+            {
+                return Redirect("/Job/New");
             }
 
-            return View(newJobViewModel);
+            
         }
     }
 }
