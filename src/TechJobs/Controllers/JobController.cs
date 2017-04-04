@@ -55,12 +55,9 @@ namespace TechJobs.Controllers
                 // when you return, use /Job?id={0}
                 return Redirect("/Job?id=" + newJob.ID);
             }
-            else
-            {
-                return Redirect("/Job/New");
-            }
 
-            
+            return View(newJobViewModel);
+
         }
     }
 }
