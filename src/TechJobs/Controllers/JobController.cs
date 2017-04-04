@@ -50,9 +50,9 @@ namespace TechJobs.Controllers
                 newJob.PositionType = data.PositionTypes.Find(newJobViewModel.PositionTypeID);
 
                 jobData.Jobs.Add(newJob);
+
                 int newID = newJob.ID;
-                // int thisID = jobData.Jobs.Count;
-                // when you return, use /Job?id={0}
+
                 return Redirect("/Job?id=" + newJob.ID);
             }
 
