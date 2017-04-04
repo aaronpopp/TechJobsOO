@@ -38,10 +38,44 @@ namespace TechJobs.Controllers
             // new Job and add it to the JobData data store. Then
             // redirect to the Job detail (Index) action/view for the new Job.
 
-            // UNCOMMENT THIS WHEN YOU PICK BACK UP! 
-            // if (ModelState.IsValid)
+            /*
+        [HttpPost]
+        public IActionResult Add(AddCheeseViewModel addCheeseViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // Add the new cheese to my existing cheeses
+                Cheese newCheese = new Models.Cheese
+                {
+                    Name = addCheeseViewModel.Name,
+                    Description = addCheeseViewModel.Description,
+                    Type = addCheeseViewModel.Type
+                };
 
-                return View(newJobViewModel);
+                CheeseData.Add(newCheese);
+
+                return Redirect("/Cheese");
+            }
+             */
+
+            // (ID, Name, Employer, Location, Core Competency, Position Type)
+            if (ModelState.IsValid)
+            {
+                JobData data = JobData.GetInstance();
+
+                Job newJob = new Job();
+                newJob.Name = newJobViewModel.Name;
+                newJob.Employer = data.Employers.Find(newJobViewModel.EmployerID);
+                newJob.Location = data.Locations.Find(newJobViewModel.LocationID);
+                newJob.CoreCompetency = data.CoreCompetencies.Find(newJobViewModel.CoreCompetencyID);
+                newJob.PositionType = data.PositionTypes.Find(newJobViewModel.PositionTypeID);
+
+                jobData.Jobs.Add(newJob)
+
+                // when you return, use /Job?id={0}
+            }
+
+            return View(newJobViewModel);
         }
     }
 }
